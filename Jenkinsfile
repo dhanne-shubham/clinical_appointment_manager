@@ -136,12 +136,12 @@ pipeline {
 	                string(credentialsId: 'DJANGO_SUPERUSER_EMAIL',    variable: 'DJANGO_SUPERUSER_EMAIL'),
 	                string(credentialsId: 'DJANGO_SUPERUSER_FIRSTNAME', variable: 'DJANGO_SUPERUSER_FIRSTNAME'),
 	                string(credentialsId: 'DJANGO_SUPERUSER_LASTNAME',  variable: 'DJANGO_SUPERUSER_LASTNAME'),
+					string(credentialsId: 'DJANGO_SECRET_KEY',  variable: 'DJANGO_SECRET_KEY'),
 	                string(credentialsId: 'DB_USER',  variable: 'DB_USER'),
 	                string(credentialsId: 'DB_PASSWORD',  variable: 'DB_PASSWORD'),
 	                string(credentialsId: 'DB_HOST',  variable: 'DB_HOST'),
 	                string(credentialsId: 'DB_PORT',  variable: 'DB_PORT'),
-	                string(credentialsId: 'DB_NAME',  variable: 'DB_NAME'),
-					string(credentialsId: 'DJANGO_SECRET_KEY',  variable: 'DJANGO_SECRET_KEY')
+	                string(credentialsId: 'DB_NAME',  variable: 'DB_NAME')
                 ]) {
                 sh """
                     docker run -d \\
