@@ -25,7 +25,7 @@ pipeline {
         }
         stage('github checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/jsasi2004/clinic_appointment.git'
+                git branch: 'main', url: 'https://github.com/dhanne-shubham/clinical_appointment_manager.git'
             }
         }
         stage('trivy scan') {
