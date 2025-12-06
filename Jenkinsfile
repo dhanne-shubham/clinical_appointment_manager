@@ -146,6 +146,7 @@ pipeline {
                 sh """
                     docker run -d \\
                     --name ${CONTAINER_NAME} \\
+					--restart=unless-stopped \\
                     -e DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME} \\
                     -e DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD} \\
                     -e DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL} \\
