@@ -156,8 +156,7 @@ pipeline {
                     -e DB_PORT=${DB_PORT} \\
                     -e DB_USER=${DB_USER} \\
                     -e DB_PASSWORD=${DB_PASSWORD} \\
-		    -e DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} \\
-		    --restart=unless-stopped \\
+		            -e DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY} \\
                     -p 8000:8000 \\
                     dhanneshubham/${DOCKER_IMAGE_NAME}:latest
                 """
