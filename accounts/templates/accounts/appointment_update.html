@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reschedule Appointment</title>
+
+<script>
+    function loadValidation() {
+        let today = new Date().toISOString().split("T")[0];
+        document.getElementById("date").setAttribute("min", today);
+    }
+
+    function validateTime() {
+        let start = document.getElementById("start_time").value;
+        let end = document.getElementById("end_time").value;
+
+        if (start && end && end <= start) {
+            alert("❌ End time must be AFTER start time.");
+            document.getElementById("end_time").value = "";
+        }
+    }
+</script>
+</head>
+<body onload="loadValidation()" style="margin:0px;padding:0px;">
+
+{% if success %}
+<script>
+    alert("⟳ Reschedule request submitted successfully!");
+    window.location.href = "{% url 'appointment_list' %}";
+</script>
+{% endif %}
+
+{% if error %}
+<script>
+    let e = "{{ error }}";
+
+    if (e === "invalid") alert("❌ Invalid date or time format.");
+    else if (e === "past") alert("❌ You cannot select a past date.");
+    else if (e === "startpast") alert("❌ Start time cannot be earlier than current time.");
+    else if (e === "endbeforestart") alert("❌ End time must be AFTER start time.");
+    else if (e === "conflict") alert("❌ You already have another appointment in this time range.");
+</script>
+{% endif %}
+
+
+{% include 'accounts/patient_header.html' %}
+
+<div style="padding:25px; font-family:Arial;">
+
+<h2>Reschedule Appointment</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    Healthcare Provider:
+    <p>
+        {{ appointment.provider.first_name }} {{ appointment.provider.last_name }}
+        ({{ appointment.provider.designation }})
+    </p>
+    <br>
+
+    New Date:<br>
+    <input type="date" id="date" name="date" value="{{ appointment.date }}" required><br><br>
+
+    New Start Time:<br>
+    <input type="time" id="start_time" name="start_time" value="{{ appointment.start_time }}" required onchange="validateTime()"><br><br>
+
+    New End Time:<br>
+    <input type="time" id="end_time" name="end_time" value="{{ appointment.end_time }}" required onchange="validateTime()"><br><br>
+
+    <button type="submit">Submit Reschedule Request</button>
+</form>
+
+</div>
+
+</body>
+</html>

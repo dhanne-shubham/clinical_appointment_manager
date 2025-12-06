@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #283593;
+            color: white;
+            padding: 15px 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .header .app-name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .header a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 25px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            width: 300px;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .menu-card a {
+            text-decoration: none;
+            color: #283593;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+    <div class="app-name">🏥 Clinic Appointment System - Admin</div>
+
+    <div>
+        <a href="{% url 'admin_profile' %}">Profile</a> |
+        <a href="/admin/" target="_blank">Django Admin Panel</a> |
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+    </div>
+
+    <div style="margin-left: 25px;margin-top: 25px;">
+       <h1> Welcome, <strong>{{ request.user }}</strong></h1>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <div class="section-title">Admin Tools</div>
+
+        <!-- Provider Management Card -->
+        <div class="menu-card">
+            <h3>Healthcare Providers</h3>
+            <p>Manage provider accounts, update roles, and set designations.</p>
+            <a href="{% url 'provider_list' %}">Go to Provider Management →</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ day }} {{ month }} {{ year }}</title>
+</head>
+<body style="padding:0;margin:0;">
+
+{% include "accounts/provider_header.html" %}
+
+<div style="padding:25px; font-family:Arial;">
+
+<h2>Appointments for {{ day }} {{ month }} {{ year }}</h2>
+
+{% if appts %}
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Time</th>
+        <th>Patient</th>
+        <th>Reason</th>
+        <th>Status</th>
+    </tr>
+
+    {% for a in appts %}
+    <tr>
+        <td>{{ a.start_time }} → {{ a.end_time }}</td>
+        <td>{{ a.patient }}</td>
+        <td>{{ a.reason }}</td>
+        <td>{{ a.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No appointments this day.</p>
+{% endif %}
+
+<br><br>
+
+<a href="{% url 'provider_calendar' %}">Back to Calendar</a>
+
+</div>
+
+</body>
+</html>

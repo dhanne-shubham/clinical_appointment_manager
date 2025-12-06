@@ -1,0 +1,36 @@
+<html>
+    <body style="margin:0;padding:0;">
+{% include "accounts/patient_header.html" %}
+
+<div style="padding: 20px;">
+    <h2>My Profile</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green; font-weight: bold;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>First Name:</label><br>
+        <input type="text" name="first_name" value="{{ patient.first_name }}" required><br><br>
+
+        <label>Last Name:</label><br>
+        <input type="text" name="last_name" value="{{ patient.last_name }}" required><br><br>
+
+        <label>Username:</label><br>
+        <input type="text" name="username" value="{{ patient.username }}" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" value="{{ patient.email }}" required><br><br>
+
+        <button type="submit" style="padding: 8px 20px;">Save Changes</button>
+    </form>
+
+    <br>
+    <a href="{% url 'patient_change_password' %}">Change Password →</a>
+</div>
+</body>
+</html>

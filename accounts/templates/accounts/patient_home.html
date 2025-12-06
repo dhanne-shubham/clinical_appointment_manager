@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Dashboard</title>
+    <style>
+        body { margin:0; padding:0; font-family:Arial; background:#f5f5f5; }
+        .header {
+            background:#283593; padding:15px; color:white;
+            display:flex; justify-content:space-between;
+        }
+        a { color:blue; text-decoration:none; margin-left:15px; }
+        .container { padding:30px; }
+        .card {
+            background:white; padding:20px;
+            border-radius:10px; width:300px;
+            margin-bottom:20px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+{% include "accounts/patient_header.html" %}
+<div style="margin-top: 25px;margin-left: 25px;">
+        <h1>Welcome, <strong>{{ request.user }}</strong></h1>
+    </div>
+
+<div class="container">
+
+    <div class="card">
+        <h3>Book Appointment</h3>
+        <a href="{% url 'appointment_add' %}">Book Now →</a>
+    </div>
+
+    <div class="card">
+        <h3>My Appointments</h3>
+        <a href="{% url 'appointment_list' %}">View →</a>
+    </div>
+
+</div>
+
+</body>
+</html>

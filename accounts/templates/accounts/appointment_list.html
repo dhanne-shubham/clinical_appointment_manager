@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Appointments</title>
+</head>
+<body style="margin: 0;padding:0;">
+
+{% include "accounts/patient_header.html" %}
+
+<div style="padding:25px; font-family:Arial;">
+
+<h2>My Appointments</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Provider</th>
+        <th>Designation</th>
+        <th>Date</th>
+        <th>Time Range</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Reschedule</th>
+        <th>Delete</th>
+    </tr>
+
+    {% for a in appointments %}
+    <tr>
+        <td>{{ a.provider.first_name }} {{ a.provider.last_name }}</td>
+        <td>{{ a.provider.designation }}</td>
+        <td>{{ a.date }}</td>
+        <td>{{ a.start_time }} → {{ a.end_time }}</td>
+        <td>{{ a.reason }}</td>
+        <td>{{ a.status }}</td>
+        <td><a href="{% url 'appointment_reschedule' a.id %}">Reschedule</a></td>
+        <td><a href="{% url 'appointment_delete' a.id %}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+</body>
+</html>

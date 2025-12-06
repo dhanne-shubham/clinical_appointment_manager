@@ -1,0 +1,99 @@
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #283593;
+            color: white;
+            padding: 15px 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .header .app-name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .header a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 25px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            width: 300px;
+            display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .menu-card a {
+            text-decoration: none;
+            color: #283593;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="app-name">🏥 Clinic Appointment System - Admin</div>
+
+        <div>
+            <a href="/admin-dashboard/">Admin Home</a> |
+            <a href="/admin/" target="_blank">Django Admin Panel</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+    <div style="margin-top: 25px;margin-left: 25px;">
+    <h2>Edit Provider</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>First Name:</label>
+        <input type="text" name="first_name" value="{{ provider.first_name }}" required><br><br>
+
+        <label>Last Name:</label>
+        <input type="text" name="last_name" value="{{ provider.last_name }}" required><br><br>
+
+        <label>Username:</label>
+        <input type="text" name="username" value="{{ provider.username }}" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ provider.email }}" required><br><br>
+
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ provider.designation }}" required><br><br>
+
+        <label>New Password (optional):</label>
+        <input type="password" name="password"><br><br>
+
+        <button type="submit">Update Provider</button>
+    </form>
+    </div>
+</body>
+
+</html>

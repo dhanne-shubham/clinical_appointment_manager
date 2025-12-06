@@ -1,0 +1,20 @@
+<div style="
+    background:#283593;
+    padding:15px;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:Arial;
+">
+    <div style="font-size:20px; font-weight:bold;">
+        🏥 Admin Dashboard
+    </div>
+
+    <div>
+        <a href="/admin-dashboard/" style="color:#ffeb3b; margin-right:15px;">Home</a>
+        <a href="{% url 'admin_profile' %}" style="color:#ffeb3b; margin-right:15px;">Profile</a>
+        <a href="/admin/" style="color:#ffeb3b; margin-right:15px;" target="_blank">Django Admin</a>
+        <a href="{% url 'logout' %}" style="color:#ffeb3b;">Logout</a>
+    </div>
+</div>

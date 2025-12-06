@@ -1,0 +1,39 @@
+<html>
+    <body style="margin: 0;padding:0;">
+        
+    
+{% include "accounts/admin_header.html" %}
+
+<div style="padding:25px;font-family:Arial">
+
+<h2>Admin Profile</h2>
+
+{% for msg in messages %}
+<p style="color:green;">{{ msg }}</p>
+{% endfor %}
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Username:</label><br>
+    <input type="text" name="username" value="{{ admin.username }}" required><br><br>
+
+    <label>First Name:</label><br>
+    <input type="text" name="first_name" value="{{ admin.first_name }}"><br><br>
+
+    <label>Last Name:</label><br>
+    <input type="text" name="last_name" value="{{ admin.last_name }}"><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" value="{{ admin.email }}"><br><br>
+
+    <button type="submit">Update Profile</button>
+</form>
+
+<br>
+
+<a href="{% url 'admin_change_password' %}">Change Password</a>
+
+</div>
+</body>
+</html>

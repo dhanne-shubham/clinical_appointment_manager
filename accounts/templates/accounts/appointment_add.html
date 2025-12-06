@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment</title>
+
+<script>
+    function setMinDate() {
+        let today = new Date().toISOString().split("T")[0];
+        document.getElementsByName("date")[0].setAttribute("min", today);
+    }
+
+    function adjustTimeRestrictions() {
+        let dateInput = document.getElementsByName("date")[0].value;
+        let startInput = document.getElementById("start_time");
+        let endInput = document.getElementById("end_time");
+
+        let now = new Date();
+        let currentTime = now.toISOString().substring(11, 16); // local HH:MM
+
+        if (dateInput === new Date().toISOString().split("T")[0]) {
+            // If booking today → enforce min time = now
+            startInput.min = currentTime;
+        } else {
+            startInput.min = "00:00"; // no restrictions
+        }
+    }
+
+    function validateTime() {
+        let start = document.getElementById("start_time").value;
+        let end = document.getElementById("end_time").value;
+
+        if (start && end && end <= start) {
+            alert("❌ End time must be AFTER start time.");
+            document.getElementById("end_time").value = "";
+        }
+    }
+
+    window.onload = function () {
+        setMinDate();
+        adjustTimeRestrictions();
+    };
+</script>
+
+</head>
+<body style="margin:0;padding:0;">
+
+{% include "accounts/patient_header.html" %}
+
+<div style="padding:25px; font-family:Arial;">
+
+<h2>Book Appointment</h2>
+
+{% for msg in messages %}
+<p style="color:red;">{{ msg }}</p>
+{% endfor %}
+
+<form method="post">
+    {% csrf_token %}
+
+    Provider:<br>
+    <select name="provider" required>
+        {% for p in providers %}
+        <option value="{{ p.id }}">{{ p.first_name }} {{ p.last_name }} ({{ p.designation }})</option>
+        {% endfor %}
+    </select><br><br>
+
+    Date:<br>
+<input type="date" name="date" required min="{{ today }}">
+<br><br>
+
+
+
+Start Time:<br>
+<input type="time" id="start_time" name="start_time" required onchange="validateTime();"><br><br>
+
+End Time:<br>
+<input type="time" id="end_time" name="end_time" required onchange="validateTime();"><br><br>
+
+
+    Reason:<br>
+    <textarea name="reason" required></textarea><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // Keep date >= today
+        let dateInput = document.querySelector("input[name='date']");
+        let today = new Date().toISOString().split("T")[0];
+        dateInput.setAttribute("min", today);
+
+    });
+</script>
+{% if popup %}
+<script>
+    alert("{{ popup }}");
+</script>
+{% endif %}
+
+{% if success_popup %}
+<script>
+    alert("{{ success_popup }}");
+    window.location.href = "{% url 'appointment_list' %}";
+</script>
+{% endif %}
+
+</body>
+
+</html>
